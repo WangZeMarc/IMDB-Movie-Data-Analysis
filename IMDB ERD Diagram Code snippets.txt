@@ -1,0 +1,68 @@
+Table name_basics{
+  nconst STRING [pk]
+  primary_name STRING
+  birth_year INTEGER
+  death_year INTEGER
+  primary_profession STRING
+  known_for_titles STRING 
+}
+
+Table reviews{
+  review STRING
+  split STRING
+  label STRING
+  movie_id STRING [ref: > title_basics.tconst]
+  reviewer_rating INTEGER
+  movie_url STRING
+}
+
+Table title_akas{
+  title_id STRING [ref: > title_basics.tconst]
+  ordering INTEGER
+  title STRING 
+  region STRING
+  language STRING
+  types STRING
+  attributes STRING
+  is_original_title BOOLEAN
+}
+
+Table title_basics{
+  tconst STRING [pk]
+  title_type STRING
+  primary_title STRING 
+  original_title STRING 
+  is_adult INTEGER
+  start_year INTEGER
+  end_year INTEGER
+  runtime_minutes INTEGER
+  genres STRING
+}
+
+Table title_crew{
+  tconst STRING [ref: > title_basics.tconst]
+  directors STRING
+  writers STRING
+}
+
+Table title_episode{
+  tconst STRING [ref: > title_basics.tconst]
+  parent_tconst STRING 
+  season_number INTEGER
+  episode_number INTEGER
+}
+
+Table title_principals{
+  tconst STRING [ref: > title_basics.tconst]
+  ordering INTEGER 
+  nconst STRING [ref: > name_basics.nconst]
+  category STRING
+  job STRING
+  characters STRING
+}
+
+Table title_ratings{
+  tconst STRING [ref: > title_basics.tconst]
+  average_rating FLOAT
+  num_votes INTEGER
+}
